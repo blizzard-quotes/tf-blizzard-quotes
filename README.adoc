@@ -1,0 +1,32 @@
+= terraform-aws-blizzard-quotes
+
+== Summary
+
+Repository housing the terraform configuration files for configuring the
+the infrastructure for the blizzard-quotes AWS account.
+
+Not much infrastructure to configure since everything in the blizzard-quotes account
+is serverless and deployed via the serverless framework.
+See https://github.com/blizzard-quotes for the api repositories which use
+the serverless framework.
+
+Primarily configures resources necessary to deploy a serverless Swagger UI
+for blizzard-quotes apis. Raw specification files can be found under specifications/.
+Also configures certificates, groups, users, and other miscellaneous resources.
+
+Costs are meant to be kept to a minimum. Currently only costs ~ $0.50 to $0.55 a month
+(The HostedZone costs $50) with apis active. 
+The domain name blizzard-quotes.com costs $12 a year.
+
+Every resource for blizzard-quotes should be configured through this repository
+or an application using the serverless framework. 
+The only exception at the moment are the SNS topic subscriptions.
+
+== Additional work
+
+Additional work which may or may not be accomplished as time passes.
+
+* Store tf-state in an s3 backend
+** Necessary if passwords or multiple people collaborate in this account at the same time
+* Refactor root module into multiple root modules
+** Not a necessity, but helpful

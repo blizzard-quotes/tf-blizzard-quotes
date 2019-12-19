@@ -1,0 +1,361 @@
+openapi: 3.0.2
+info:
+  title: Starcraft II Quotes API
+  description: Simple API for retrieving Starcraft II quotes
+  version: 1.0.0
+  license:
+    name: MIT
+servers:
+  - url: 'https://api.sc2.blizzardquotes.com/v1'
+  - url: 'https://test.api.sc2.blizzardquotes.com/v1'
+  - url: 'https://dev.api.sc2.blizzardquotes.com/v1'
+tags:
+  - name: 'quotes'
+    description: 'Retrieve quotes from Starcraft II'
+    externalDocs:
+      description: 'Find out more'
+      url: 'https://sc2.blizzardquotes.com'
+  - name: 'factions'
+    description: 'Retrieve all factions, including the nuetral faction, from Starcraft II'
+    externalDocs:
+      description: 'Find out more'
+      url: 'https://sc2.blizzardquotes.com'
+  - name: 'units'
+    description: 'Retrieve all units, including heroes, that have unique quotes from Starcraft II'
+    externalDocs:
+      description: 'Find out more'
+      url: 'https://sc2.blizzardquotes.com'
+  - name: 'actions'
+    description: 'Retrieve all actions units perform when saying a quote from Starcraft II'
+    externalDocs:
+      description: 'Find out more'
+      url: 'https://sc2.blizzardquotes.com'
+paths:
+  /quotes:
+    get:
+      tags:
+        - 'quotes'
+      summary: Returns a list of quote objects
+      description: |
+        A paramater can be specified once (e.g. unit=Marauder)
+        or multiple times (e.g. unit=Marauder&unit=Marine)
+      parameters:
+        - $ref: '#/components/parameters/Faction'
+        - $ref: '#/components/parameters/Unit'
+        - $ref: '#/components/parameters/Action'
+        - $ref: '#/components/parameters/Text'
+        - $ref: '#/components/parameters/NotFaction'
+        - $ref: '#/components/parameters/NotUnit'
+        - $ref: '#/components/parameters/NotAction'
+        - $ref: '#/components/parameters/NotText'
+        - $ref: '#/components/parameters/IsHero'
+        - $ref: '#/components/parameters/IsMelee'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: Successfully returned a list of quote objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Quote'
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+  /quotes/random:
+    get:
+      tags:
+        - 'quotes'
+      summary: Returns a random quote object
+      description: |
+        A paramater can be specified once (e.g. unit=Marauder)
+        or multiple times (e.g. unit=Marauder&unit=Marine)
+      parameters:
+        - $ref: '#/components/parameters/Faction'
+        - $ref: '#/components/parameters/Unit'
+        - $ref: '#/components/parameters/Action'
+        - $ref: '#/components/parameters/Text'
+        - $ref: '#/components/parameters/NotFaction'
+        - $ref: '#/components/parameters/NotUnit'
+        - $ref: '#/components/parameters/NotAction'
+        - $ref: '#/components/parameters/NotText'
+        - $ref: '#/components/parameters/IsHero'
+        - $ref: '#/components/parameters/IsMelee'
+      responses:
+        '200':
+          description: Successfully returned a quote object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+  /quotes/{id}:
+    get:
+      tags:
+        - 'quotes'
+      summary: Returns a specified quote object
+      description: |
+        Uses the id to lookup and return the specified quote object
+      parameters:
+        - name: 'id'
+          in: 'path'
+          description: 'ID of quote object to return'
+          required: true
+          schema:
+            type: 'string'
+      responses:
+        '200':
+          description: Successfully returned a list of quote objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Quote'
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+  /factions:
+    get:
+      tags:
+        - 'factions'
+      summary: Returns a list of factions
+      description: Returns a list of factions
+      responses:
+        '200':
+          description: Successfully returned a list of factions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                  - Protoss
+                  - Terran
+                  - Zerg
+                  - Hybrid
+  /units:
+    get:
+      tags:
+        - 'units'
+      summary: Returns a list of units
+      description: Returns a list of units
+      parameters:
+        - $ref: '#/components/parameters/Faction'
+        - $ref: '#/components/parameters/NotFaction'
+        - $ref: '#/components/parameters/IsHero'
+        - $ref: '#/components/parameters/IsMelee'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: Successfully returned a list of units
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                  - Adept
+                  - Archon
+                  - Carrier
+                  - Dark Templar
+                  - ...
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+  /actions:
+    get:
+      tags:
+        - 'actions'
+      summary: Returns a list of actions
+      description: Returns a list of actions
+      responses:
+        '200':
+          description: Successfully returned a list of actions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                  - Trained
+                  - Attacked
+                  - Selected
+                  - Move
+                  - ...
+        '400':
+          $ref: '#/components/responses/400Error'
+        '500':
+          $ref: '#/components/responses/500Error'
+components:
+  schemas:
+    Quote:
+      type: object
+      required:
+        - value
+        - faction
+        - unit
+        - action
+        - isHero
+        - isMelee
+        - id
+      properties:
+        value:
+          type: string
+          example: SCV ready.
+        faction:
+          type: string
+          example: Terran
+        unit:
+          type: string
+          example: SCV
+        action:
+          type: string
+          example: Trained
+        isHero:
+          type: boolean
+          example: false
+        isMelee:
+          type: boolean
+          example: true
+        id:
+          type: string
+          example: cd3f3bbf-3d8d-5d03-bb62-a101dff972e9
+  parameters:
+    Faction:
+      name: faction
+      in: query
+      description: Only return quotes from a particular faction
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+    Unit:
+      name: unit
+      in: query
+      description: Only return quotes from a particular unit
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+    Action:
+      name: action
+      in: query
+      description: Only return quotes from a particular action
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+    Text:
+      name: text
+      in: query
+      description: Only return quotes containing the specified text
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+    NotFaction:
+      name: not_faction
+      in: query
+      description: Only return quotes not from a particular faction
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+    NotUnit:
+      name: not_unit
+      in: query
+      description: Only return quotes not from a particular unit
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+    NotAction:
+      name: not_action
+      in: query
+      description: Only return quotes not from a particular action
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+    NotText:
+      name: not_text
+      in: query
+      description: Only return quotes not containing the specified text
+      schema:
+        type: array
+        items:
+          type: string
+      style: form
+      explode: true
+    IsHero:
+      name: is_hero
+      in: query
+      description: Only return quotes from heroes or not heroes
+      schema:
+        type: boolean
+    IsMelee:
+      name: is_melee
+      in: query
+      description: Only return quotes from melee units or no melee units
+      schema:
+        type: boolean
+    Limit:
+      name: limit
+      in: query
+      description: Only return a specified number of quotes
+      schema:
+        type: number
+      explode: true
+    Offset:
+      name: offset
+      in: query
+      description: Return quotes starting at specific offset
+      schema:
+        type: number
+      explode: true
+  responses:
+    400Error:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    500Error:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string

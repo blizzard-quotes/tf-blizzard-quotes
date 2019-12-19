@@ -1,0 +1,6 @@
+# Compiled files
+*.tfstate.backup
+*.tfstate.lock.info
+
+# Directories
+.terraform/
