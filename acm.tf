@@ -37,3 +37,23 @@ resource "aws_acm_certificate" "sc2_quotes" {
     ]
   }
 }
+
+resource "aws_acm_certificate" "sc_quotes" {
+  domain_name       = local.sc_hostname
+  validation_method = "DNS"
+
+  subject_alternative_names = [
+    "*.${local.sc_hostname}",
+    "*.${local.sc_api_hostname}",
+    "*.${local.sc_swagger_hostname}"
+  ]
+
+  lifecycle {
+    create_before_destroy = true
+
+    ignore_changes = [
+      # alternative_names makes terraform angsty
+      subject_alternative_names
+    ]
+  }
+}

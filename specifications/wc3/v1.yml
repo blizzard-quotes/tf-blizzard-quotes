@@ -16,7 +16,7 @@ tags:
       description: 'Find out more'
       url: 'https://wc3.blizzardquotes.com'
   - name: 'factions'
-    description: 'Retrieve all factions, including the nuetral faction, from Warcraft III'
+    description: 'Retrieve all factions, including the neutral faction, from Warcraft III'
     externalDocs:
       description: 'Find out more'
       url: 'https://wc3.blizzardquotes.com'
@@ -37,7 +37,7 @@ paths:
         - 'quotes'
       summary: Returns a list of quote objects
       description: |
-        A paramater can be specified once (e.g. unit=Knight)
+        A parameter can be specified once (e.g. unit=Knight)
         or multiple times (e.g. unit=Knight&unit=Captain)
       parameters:
         - $ref: '#/components/parameters/Faction'
@@ -71,7 +71,7 @@ paths:
         - 'quotes'
       summary: Returns a random quote object
       description: |
-        A paramater can be specified once (e.g. unit=Knight)
+        A parameter can be specified once (e.g. unit=Knight)
         or multiple times (e.g. unit=Knight&unit=Captain)
       parameters:
         - $ref: '#/components/parameters/Faction'

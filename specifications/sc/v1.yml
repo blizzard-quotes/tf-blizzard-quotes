@@ -1,35 +1,35 @@
 openapi: 3.0.2
 info:
-  title: Starcraft II Quotes API
-  description: Simple API for retrieving Starcraft II quotes
+  title: Starcraft Quotes API
+  description: Simple API for retrieving Starcraft quotes (the first game)
   version: 1.0.0
   license:
     name: MIT
 servers:
-  - url: "https://api.sc2.blizzardquotes.com/v1"
-  - url: "https://test.api.sc2.blizzardquotes.com/v1"
-  - url: "https://dev.api.sc2.blizzardquotes.com/v1"
+  - url: "https://api.sc.blizzardquotes.com/v1"
+  - url: "https://test.api.sc.blizzardquotes.com/v1"
+  - url: "https://dev.api.sc.blizzardquotes.com/v1"
 tags:
   - name: "quotes"
-    description: "Retrieve quotes from Starcraft II"
+    description: "Retrieve quotes from Starcraft"
     externalDocs:
       description: "Find out more"
-      url: "https://sc2.blizzardquotes.com"
+      url: "https://sc.blizzardquotes.com"
   - name: "factions"
-    description: "Retrieve all factions, including the neutral faction, from Starcraft II"
+    description: "Retrieve all factions, including the neutral faction, from Starcraft"
     externalDocs:
       description: "Find out more"
-      url: "https://sc2.blizzardquotes.com"
+      url: "https://sc.blizzardquotes.com"
   - name: "units"
-    description: "Retrieve all units, including heroes, that have unique quotes from Starcraft II"
+    description: "Retrieve all units, including heroes, that have unique quotes from Starcraft"
     externalDocs:
       description: "Find out more"
-      url: "https://sc2.blizzardquotes.com"
+      url: "https://sc.blizzardquotes.com"
   - name: "actions"
-    description: "Retrieve all actions units perform when saying a quote from Starcraft II"
+    description: "Retrieve all actions units perform when saying a quote from Starcraft"
     externalDocs:
       description: "Find out more"
-      url: "https://sc2.blizzardquotes.com"
+      url: "https://sc.blizzardquotes.com"
 paths:
   /quotes:
     get:
@@ -37,8 +37,8 @@ paths:
         - "quotes"
       summary: Returns a list of quote objects
       description: |
-        A parameter can be specified once (e.g. unit=Marauder)
-        or multiple times (e.g. unit=Marauder&unit=Marine)
+        A parameter can be specified once (e.g. unit=Vulture)
+        or multiple times (e.g. unit=Vulture&unit=Marine)
       parameters:
         - $ref: "#/components/parameters/Faction"
         - $ref: "#/components/parameters/Unit"
@@ -71,8 +71,8 @@ paths:
         - "quotes"
       summary: Returns a random quote object
       description: |
-        A parameter can be specified once (e.g. unit=Marauder)
-        or multiple times (e.g. unit=Marauder&unit=Marine)
+        A parameter can be specified once (e.g. unit=Vulture)
+        or multiple times (e.g. unit=Vulture&unit=Marine)
       parameters:
         - $ref: "#/components/parameters/Faction"
         - $ref: "#/components/parameters/Unit"
@@ -141,7 +141,6 @@ paths:
                   - Protoss
                   - Terran
                   - Zerg
-                  - Hybrid
   /units:
     get:
       tags:
@@ -165,10 +164,10 @@ paths:
                 items:
                   type: string
                 example:
-                  - Adept
-                  - Archon
-                  - Carrier
-                  - Dark Templar
+                  - Battlecruiser
+                  - Dropship
+                  - Firebat
+                  - Ghost
                   - ...
         "400":
           $ref: "#/components/responses/400Error"
@@ -191,9 +190,8 @@ paths:
                   type: string
                 example:
                   - Trained
-                  - Attacked
                   - Selected
-                  - Move
+                  - Confirming
                   - ...
         "400":
           $ref: "#/components/responses/400Error"
@@ -214,7 +212,7 @@ components:
       properties:
         value:
           type: string
-          example: SCV ready.
+          example: SCV good to go, sir.
         faction:
           type: string
           example: Terran
@@ -232,7 +230,7 @@ components:
           example: true
         id:
           type: string
-          example: cd3f3bbf-3d8d-5d03-bb62-a101dff972e9
+          example: a5be4510-24f5-5e11-986d-14dfa905c7f1
   parameters:
     Faction:
       name: faction
