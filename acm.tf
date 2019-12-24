@@ -1,3 +1,19 @@
+resource "aws_acm_certificate" "blizzard_quotes" {
+  domain_name       = local.blizzard_quotes_hostname
+  validation_method = "DNS"
+
+  subject_alternative_names = ["www.${local.blizzard_quotes_hostname}"]
+
+  lifecycle {
+    create_before_destroy = true
+
+    ignore_changes = [
+      # alternative_names makes terraform angsty
+      subject_alternative_names
+    ]
+  }
+}
+
 resource "aws_acm_certificate" "wc3_quotes" {
   domain_name       = local.wc3_hostname
   validation_method = "DNS"
