@@ -8,7 +8,7 @@ module "wc3_swagger" {
   hostname            = local.wc3_swagger_hostname
   route_53_zone_name  = local.blizzard_quotes_hostname
   acm_certificate_arn = aws_acm_certificate.wc3_quotes.arn
-  s3_web_bucket       = local.wc3_swagger_bucket_name
+  s3_web_bucket       = local.s3_bucket_wc3_swagger_name
   s3_logs_bucket      = local.s3_bucket_logs_name
   s3_force_destroy    = true
   s3_versioning       = false
@@ -21,7 +21,7 @@ module "sc2_swagger" {
   hostname            = local.sc2_swagger_hostname
   route_53_zone_name  = local.blizzard_quotes_hostname
   acm_certificate_arn = aws_acm_certificate.sc2_quotes.arn
-  s3_web_bucket       = local.sc2_swagger_bucket_name
+  s3_web_bucket       = local.s3_bucket_sc2_swagger_name
   s3_logs_bucket      = local.s3_bucket_logs_name
   s3_force_destroy    = true
   s3_versioning       = false
@@ -34,7 +34,7 @@ module "sc_swagger" {
   hostname            = local.sc_swagger_hostname
   route_53_zone_name  = local.blizzard_quotes_hostname
   acm_certificate_arn = aws_acm_certificate.sc_quotes.arn
-  s3_web_bucket       = local.sc_swagger_bucket_name
+  s3_web_bucket       = local.s3_bucket_sc_swagger_name
   s3_logs_bucket      = local.s3_bucket_logs_name
   s3_force_destroy    = true
   s3_versioning       = false
