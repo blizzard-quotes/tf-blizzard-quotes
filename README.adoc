@@ -15,7 +15,7 @@ for blizzard-quotes apis. Raw specification files can be found under specificati
 Also configures certificates, groups, users, and other miscellaneous resources.
 
 Costs are meant to be kept to a minimum. Currently only costs ~ $0.50 to $0.55 a month
-(The Hosted Zone costs $50) with apis active. 
+(The Hosted Zone costs $0.50) with apis active. 
 The domain name blizzard-quotes.com costs $12 a year.
 
 Every resource for blizzard-quotes should be configured through this repository
