@@ -22,6 +22,15 @@ Every resource for blizzard-quotes should be configured through this repository
 or an application using the serverless framework. 
 The only exception at the moment are the SNS topic subscriptions.
 
+== Execution
+
+Example for how to execute
+
+```
+terraform init
+terraform apply -var 'os=linux' -var 'profile=blizzard-quotes'
+```
+
 == Additional work
 
 Additional work which may or may not be accomplished as time passes.

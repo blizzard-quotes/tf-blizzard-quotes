@@ -1,5 +1,5 @@
 locals {
-  interpreter = lower(var.os) == "windows" ? ["C:/Program Files/Git/bin/bash.exe", "-c"] : []
+  interpreter = lower(var.os) == "windows" ? ["C:/Program Files/Git/bin/bash.exe", "-c"] : ["/usr/bin/env", "bash", "-c"]
 }
 
 module "wc3_swagger" {
