@@ -44,7 +44,7 @@ module "sc_swagger" {
 module "wc3_swagger_ui" {
   source = "github.com/whitebread-cloud/terraform-aws-s3-swagger-ui"
 
-  s3_bucket_path     = "${module.wc3_swagger.s3_web_bucket_id}"
+  s3_bucket_path     = module.wc3_swagger.s3_web_bucket_id
   openapi_spec_paths = ["${path.cwd}/specifications/wc3/v1.yml"]
   openapi_spec_urls  = ["https://${local.wc3_swagger_hostname}/v1.yml"]
 
@@ -55,7 +55,7 @@ module "wc3_swagger_ui" {
 module "sc2_swagger_ui" {
   source = "github.com/whitebread-cloud/terraform-aws-s3-swagger-ui"
 
-  s3_bucket_path     = "${module.sc2_swagger.s3_web_bucket_id}"
+  s3_bucket_path     = module.sc2_swagger.s3_web_bucket_id
   openapi_spec_paths = ["${path.cwd}/specifications/sc2/v1.yml"]
   openapi_spec_urls  = ["https://${local.sc2_swagger_hostname}/v1.yml"]
 
@@ -66,7 +66,7 @@ module "sc2_swagger_ui" {
 module "sc_swagger_ui" {
   source = "github.com/whitebread-cloud/terraform-aws-s3-swagger-ui"
 
-  s3_bucket_path     = "${module.sc_swagger.s3_web_bucket_id}"
+  s3_bucket_path     = module.sc_swagger.s3_web_bucket_id
   openapi_spec_paths = ["${path.cwd}/specifications/sc/v1.yml"]
   openapi_spec_urls  = ["https://${local.sc_swagger_hostname}/v1.yml"]
 
