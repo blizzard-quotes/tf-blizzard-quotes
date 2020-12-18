@@ -1,8 +1,8 @@
 resource "aws_acm_certificate" "blizzard_quotes" {
-  domain_name       = local.blizzard_quotes_hostname
+  domain_name       = local.hostname_blizzard_quotes
   validation_method = "DNS"
 
-  subject_alternative_names = ["www.${local.blizzard_quotes_hostname}"]
+  subject_alternative_names = ["www.${local.hostname_blizzard_quotes}"]
 
   lifecycle {
     create_before_destroy = true
@@ -18,13 +18,13 @@ module "blizzard_quotes_acm_dns_validation" {
 }
 
 resource "aws_acm_certificate" "wc3_quotes" {
-  domain_name       = local.wc3_hostname
+  domain_name       = local.hostname_wc3
   validation_method = "DNS"
 
   subject_alternative_names = [
-    "*.${local.wc3_hostname}",
-    "*.${local.wc3_api_hostname}",
-    "*.${local.wc3_swagger_hostname}"
+    "*.${local.hostname_wc3}",
+    "*.${local.hostname_wc3_api}",
+    "*.${local.hostname_wc3_swagger}"
   ]
 
   lifecycle {
@@ -41,13 +41,13 @@ module "wc3_acm_dns_validation" {
 }
 
 resource "aws_acm_certificate" "sc2_quotes" {
-  domain_name       = local.sc2_hostname
+  domain_name       = local.hostname_sc2
   validation_method = "DNS"
 
   subject_alternative_names = [
-    "*.${local.sc2_hostname}",
-    "*.${local.sc2_api_hostname}",
-    "*.${local.sc2_swagger_hostname}"
+    "*.${local.hostname_sc2}",
+    "*.${local.hostname_sc2_api}",
+    "*.${local.hostname_sc2_swagger}"
   ]
 
   lifecycle {
@@ -64,13 +64,13 @@ module "sc2_acm_dns_validation" {
 }
 
 resource "aws_acm_certificate" "sc_quotes" {
-  domain_name       = local.sc_hostname
+  domain_name       = local.hostname_sc
   validation_method = "DNS"
 
   subject_alternative_names = [
-    "*.${local.sc_hostname}",
-    "*.${local.sc_api_hostname}",
-    "*.${local.sc_swagger_hostname}"
+    "*.${local.hostname_sc}",
+    "*.${local.hostname_sc_api}",
+    "*.${local.hostname_sc_swagger}"
   ]
 
   lifecycle {
