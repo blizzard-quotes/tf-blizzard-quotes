@@ -6,12 +6,15 @@ resource "aws_acm_certificate" "blizzard_quotes" {
 
   lifecycle {
     create_before_destroy = true
-
-    ignore_changes = [
-      # alternative_names makes terraform angsty
-      subject_alternative_names
-    ]
   }
+}
+
+module "blizzard_quotes_acm_dns_validation" {
+  source = "./modules/acm/certificate-validation"
+
+  acm_certificate_validation_options = aws_acm_certificate.blizzard_quotes.domain_validation_options
+  acm_certificate_arn = aws_acm_certificate.blizzard_quotes.arn
+  route_53_zone_id = data.aws_route53_zone.blizzard_quotes.zone_id
 }
 
 resource "aws_acm_certificate" "wc3_quotes" {
@@ -26,12 +29,15 @@ resource "aws_acm_certificate" "wc3_quotes" {
 
   lifecycle {
     create_before_destroy = true
-
-    ignore_changes = [
-      # alternative_names makes terraform angsty
-      subject_alternative_names
-    ]
   }
+}
+
+module "wc3_acm_dns_validation" {
+  source = "./modules/acm/certificate-validation"
+
+  acm_certificate_validation_options = aws_acm_certificate.wc3_quotes.domain_validation_options
+  acm_certificate_arn = aws_acm_certificate.wc3_quotes.arn
+  route_53_zone_id = data.aws_route53_zone.blizzard_quotes.zone_id
 }
 
 resource "aws_acm_certificate" "sc2_quotes" {
@@ -46,12 +52,15 @@ resource "aws_acm_certificate" "sc2_quotes" {
 
   lifecycle {
     create_before_destroy = true
-
-    ignore_changes = [
-      # alternative_names makes terraform angsty
-      subject_alternative_names
-    ]
   }
+}
+
+module "sc2_acm_dns_validation" {
+  source = "./modules/acm/certificate-validation"
+
+  acm_certificate_validation_options = aws_acm_certificate.sc2_quotes.domain_validation_options
+  acm_certificate_arn = aws_acm_certificate.sc2_quotes.arn
+  route_53_zone_id = data.aws_route53_zone.blizzard_quotes.zone_id
 }
 
 resource "aws_acm_certificate" "sc_quotes" {
@@ -66,10 +75,13 @@ resource "aws_acm_certificate" "sc_quotes" {
 
   lifecycle {
     create_before_destroy = true
-
-    ignore_changes = [
-      # alternative_names makes terraform angsty
-      subject_alternative_names
-    ]
   }
+}
+
+module "sc_acm_dns_validation" {
+  source = "./modules/acm/certificate-validation"
+
+  acm_certificate_validation_options = aws_acm_certificate.sc_quotes.domain_validation_options
+  acm_certificate_arn = aws_acm_certificate.sc_quotes.arn
+  route_53_zone_id = data.aws_route53_zone.blizzard_quotes.zone_id
 }
