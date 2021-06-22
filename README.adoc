@@ -22,6 +22,27 @@ Every resource for blizzard-quotes should be configured through this repository
 or an application using the serverless framework. 
 The only exception at the moment are the SNS topic subscriptions.
 
+=== Certificates
+
+Amazon certificates requested. Includes primary names and alternative names
+
+* blizzardquotes.com
+
+* wc3.blizzardquotes.com
+** *.wc3.blizzardquotes.com
+** *.api.wc3.blizzardquotes.com
+** *.swagger.wc3.blizzardquotes.com
+
+* sc2.blizzardquotes.com
+** *.sc2.blizzardquotes.com
+** *.api.sc2.blizzardquotes.com
+** *.swagger.sc2.blizzardquotes.com
+
+* sc.blizzardquotes.com
+** *.sc.blizzardquotes.com
+** *.api.sc.blizzardquotes.com
+** *.swagger.sc.blizzardquotes.com
+
 == Execution
 
 Example for how to execute
